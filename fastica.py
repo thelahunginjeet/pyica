@@ -33,8 +33,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 I am indebted to the FastICA code written by Pierre Lafaye de Micheaux, Stefan van der Walt, 
-and Gael Varoquaux.  I humbly suggest you use this code rather than theirs (if you can find theirs); 
-I believe mine to be better written and more extensively tested.
+and Gael Varoquaux. (Their original code had a "do whatever you want with this" license).  
+I humbly suggest you use this code rather than theirs (if you can find theirs); I believe mine 
+to be actively maintained and more extensively tested.
 '''
 
 from numpy import tanh,exp,sqrt
