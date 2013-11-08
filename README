@@ -1,0 +1,22 @@
+Author : Kevin S. Brown
+
+A python package for Independent Component Analysis (ICA).  Currently, only fixed-point FastICA is supported.  
+Calculations can be performed in either python (using numpy/scipy) or in R's 'fastICA' package, if rpy2, R,
+and the 'fastICA' package are installed on your system.
+
+See the documentation in the modules for detailed usage.  If you have a data matrix of N mixtures and T 
+samples, basic usage to extract n <= N sources amounts to:
+
+	import fastica as ica
+	A,W,S = ica.fastica(X,n)
+
+for the python version and
+
+	import rpyica as ica
+	A,W,S = rpyica.fastica_rpy(X,n)
+
+for the version that connects to R.
+
+All source code is made available under the BSD-3 license.
+
+
