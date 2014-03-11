@@ -1,4 +1,7 @@
 '''
+Pure python FastICA code; both deflation and parallel extraction are implemented.  Currently
+only fixed-point extraction (no gradient calculations).
+
 Created on Mar 2, 2011
 
 @author: Kevin S. Brown, University of Connecticut
@@ -31,12 +34,12 @@ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
 IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
 OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
 I am indebted to the FastICA code written by Pierre Lafaye de Micheaux, Stefan van der Walt, 
 and Gael Varoquaux. (Their original code had a "do whatever you want with this" license).  
 I humbly suggest you use this code rather than theirs (if you can find theirs); I believe mine 
 to be actively maintained and more extensively tested.
 '''
+
 
 from numpy import tanh,exp,sqrt
 from numpy import max as npmax

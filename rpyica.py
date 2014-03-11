@@ -1,4 +1,7 @@
 '''
+Wraps R's version of FastICA via Rpy2.  See the README for information about possible 
+differences between the python and R versions of FastICA.
+
 Created on June 14, 2013
 
 @author: Kevin S. Brown, University of Connecticut
@@ -94,6 +97,6 @@ def fastica_rpy(X,nSources,algorithm="parallel",nonlinearity="logcosh",method="C
     try:
         rica = importr('fastICA')
     except NameError:
-        print 'Cannot import package \'fastICA\'; you are missing either rpy (python problem) or fastICA (R problem)'
+        print 'Cannot import package \'fastICA\'; you are missing either rpy2 (python problem) or fastICA (R problem)'
     outDict = rica.fastICA(X.T,nSources,fun=nonlinearity,method=method,maxit=maxIterations,tol=tolerance,w_init=Winit.T)
     return array(outDict.rx2('A')).T, array(outDict.rx2('W')).T, array(outDict.rx2('S')).T

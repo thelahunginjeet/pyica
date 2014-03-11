@@ -10,7 +10,7 @@ class PyTest(Command):
         pass
     def run(self):
         import sys,subprocess
-        errno = subprocess.call([sys.executable,'runtests.py'])
+        errno = subprocess.call([sys.executable,'tests/runtests.py'])
         raise SystemExit(errno)
 
 setup(name='pyica',
