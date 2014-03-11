@@ -20,6 +20,7 @@ setup(name='pyica',
       author_email='kevin.s.brown@uconn.edu',
       url='https://github.com/thelahunginjeet/pyica',
       packages=['pyica'],
+      package_dir = {'pyica': ''},
       cmdclass = {'test': PyTest},
       license='BSD-3',
       classifiers=[
