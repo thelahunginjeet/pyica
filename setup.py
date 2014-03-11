@@ -21,6 +21,7 @@ setup(name='pyica',
       url='https://github.com/thelahunginjeet/pyica',
       packages=['pyica'],
       package_dir = {'pyica': ''},
+      package_data = {'pyica' : ['tests/*.py']},
       cmdclass = {'test': PyTest},
       license='BSD-3',
       classifiers=[
