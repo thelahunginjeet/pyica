@@ -1,4 +1,4 @@
-Author : Kevin S. Brown (kevin.s.brown@uconn.edu)
+Author : Kevin S. Brown (kevin.s.brown@uconn.edu, github.com/thelahunginjeet)
 
 A python package for Independent Component Analysis (ICA).  Currently, only fixed-point FastICA is supported.  Calculations can be performed in either python (using numpy/scipy) or in R's 'fastICA' package, if rpy2, R, and the 'fastICA' package are installed on your system.
 
@@ -16,9 +16,13 @@ for the version that connects to R.
 
 All source code is made available under the BSD-3 license.
 
-There is currently minimal testing code in the tests/ directory; the tests use pytest, which you will have to install if you do not have it.  If you do have it, run
+There is currently minimal testing code in the tests/ directory.  There are two ways to run the tests.  If you have pytest, run:
 
 	>py.test -v test_ica_pytest.py
+
+If you don't have pytest, you can run the test via distutils:
+	
+	>python setup.py test
 
 There is an issue in comparing the results from python to those from R.  It turns out (at least on my system) that python and R treat "junk" singular values differently.  Hence, if you vastly overextract (asking for, say, 60 sources when there are only 10 true ones in X) you will see different results with the pure python and R versions of fastICA, even with all other parameters being equal.  This should not cause a problem, and does not show up unless you ask for vastly more sources than are actually present in the data.
 
