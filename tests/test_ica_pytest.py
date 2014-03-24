@@ -1,5 +1,6 @@
 from pyica import fastica as ica
 from pyica import fastica_rpy as rica
+from pyica import sources
 import numpy as np
 
 
@@ -41,3 +42,12 @@ class TestRICA:
     def test_C_S_recovery(self):
         from scipy.linalg import det
         assert np.allclose(1.0,np.abs(det(np.corrcoef(self.SC,self.signals)[0:2,2:])),atol=1.0e-03),"R calling C: |det(rho(ShatT,S))| not within 1e-03 of unity"
+
+
+class TestSources:
+
+    def setup(self):
+        self.S = sources.unitsources()
+
+    def test_S_size(self):
+        assert self.S.shape[0] == 3,"sources: incorrect number of test sources generated"
