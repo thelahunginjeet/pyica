@@ -51,8 +51,8 @@ def unitsources(nSources=(1,1,1),nSamples=1024,subType='dblcosh',supType='invcos
     ----------
     nSources : tuple, optional
         nSources[0] : number of SubGaussian sources (zero is allowed)
-        nSources[1] : number of Gaussian sources (zero is allowed)
-        nSources[2] : number of SuperGaussian sources (zero is allowed)
+        nSources[1] : number of SuperGaussian sources (zero is allowed)
+        nSources[2] : number of Gaussian sources (zero is allowed)
         
     nSamples : number of samples (length of each row), optional
   
@@ -69,8 +69,8 @@ def unitsources(nSources=(1,1,1),nSamples=1024,subType='dblcosh',supType='invcos
     ----------
     S : numpy array
         first nSources[0] rows are SubGaussian (starting at 0)
-        next nSources[1] rows are Gaussian
-        next nSources[2] rows are SuperGaussian
+        next nSources[1] rows are SuperGaussian
+        next nSources[2] rows are Gaussian
 
     '''
     # for function dispatching
@@ -85,15 +85,16 @@ def unitsources(nSources=(1,1,1),nSamples=1024,subType='dblcosh',supType='invcos
 	# default to dblcosh
         s = sdblcosh(nSources[0],nSamples)
     sourceList.append(s)
-    # gaussians
-    sourceList.append(sgauss(nSources[1],nSamples))
     # supergaussians
     try:
         s = superGaussTable[supType](nSources[2],nSamples)
     except KeyError:
 	# default to invcosh
-        s = sinvcosh(nSources[2],nSamples)
+        s = sinvcosh(nSources[1],nSamples)
     sourceList.append(s)
+    # gaussians
+    sourceList.append(sgauss(nSources[2],nSamples))
+
     return vstack(filter(lambda x : shape(x) > 0, sourceList))
 
 
