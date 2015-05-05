@@ -87,7 +87,7 @@ def unitsources(nSources=(1,1,1),nSamples=1024,subType='dblcosh',supType='invcos
     sourceList.append(s)
     # supergaussians
     try:
-        s = superGaussTable[supType](nSources[2],nSamples)
+        s = superGaussTable[supType](nSources[1],nSamples)
     except KeyError:
 	# default to invcosh
         s = sinvcosh(nSources[1],nSamples)
