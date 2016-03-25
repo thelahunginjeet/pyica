@@ -11,27 +11,27 @@ This source code is provided under the BSD-3 license, duplicated as follows:
 Copyright (c) 2013, Kevin S. Brown
 All rights reserved.
 
-Redistribution and use in source and binary forms, with or without modification, 
+Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
-1. Redistributions of source code must retain the above copyright notice, this 
+1. Redistributions of source code must retain the above copyright notice, this
 list of conditions and the following disclaimer.
 
-2. Redistributions in binary form must reproduce the above copyright notice, this 
-list of conditions and the following disclaimer in the documentation and/or other 
+2. Redistributions in binary form must reproduce the above copyright notice, this
+list of conditions and the following disclaimer in the documentation and/or other
 materials provided with the distribution.
 
-3. Neither the name of the University of Connecticut  nor the names of its contributors 
-may be used to endorse or promote products derived from this software without specific 
+3. Neither the name of the University of Connecticut  nor the names of its contributors
+may be used to endorse or promote products derived from this software without specific
 prior written permission.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS 
-OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY 
-AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
-CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER 
-IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
 OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 '''
 
@@ -46,25 +46,25 @@ def unitsources(nSources=(1,1,1),nSamples=1024,subType='dblcosh',supType='invcos
     '''
     Generates a sum(nSources) x nSamples array of sources; each row is a source, and they all have
     zero mean and unit variance (up to sampling errors).
-    
+
     Parameters:
     ----------
     nSources : tuple, optional
         nSources[0] : number of SubGaussian sources (zero is allowed)
         nSources[1] : number of SuperGaussian sources (zero is allowed)
         nSources[2] : number of Gaussian sources (zero is allowed)
-        
+
     nSamples : number of samples (length of each row), optional
-  
+
     subType : string, optional
-	type of subgaussian distribution from which to sample; unrecognized 
+	type of subgaussian distribution from which to sample; unrecognized
 	distribution types default to 'dblcosh'
 
     supType : string, optional
 	type of supergaussian distribution from which to sample; unrecognized
 	distribution types default to 'invcosh'
 
- 
+
     Output:
     ----------
     S : numpy array
@@ -114,10 +114,10 @@ def sgauss(nSources,nSamples):
 def sinvcosh(nSources,nSamples):
     '''
     Generates an nSources x nSamples array of sources distributed according to:
-        
-        p(x) = 1/(2*cosh(pi*x/2))
-    
-    This yields a set of superGaussian sources (more peaked than Gaussian), and 
+
+        p(x) = (2*cosh(pi*x/2))^-1
+
+    This yields a set of superGaussian sources (more peaked than Gaussian), and
     each source will have zero mean and unit variance.
     '''
     return (4/pi)*arctanh(tan((pi/2)*(rand(nSources,nSamples) - 0.5)))
@@ -126,6 +126,8 @@ def sinvcosh(nSources,nSamples):
 def slaplace(nSources,nSamples):
     '''
     Generates an nSources x nSamples array of sources which are Laplace distributed.
+
+        p(x) = (1/sqrt(2))*exp(-sqrt(2)*x)
     '''
     s = laplace(size=(nSources,nSamples))
     return s/s.std(axis=1)[:,newaxis]
@@ -133,11 +135,11 @@ def slaplace(nSources,nSamples):
 
 def slogistic(nSources,nSamples):
     '''
-    Generates an nSources x nSamples array of logistically distributed random 
+    Generates an nSources x nSamples array of logistically distributed random
     variates with mean zero and unit variance:
 
-        p(x) = 1/((2*sqrt(12)/pi)*cosh^2(pi*x/sqrt(12)))
-    
+        p(x) = pi*sech^2(pi*x/(2*sqrt(3)))/(4*sqrt(3))
+
     '''
     return -(sqrt(3)/pi)*log(1.0/rand(nSources,nSamples) - 1.0)
 
@@ -145,11 +147,11 @@ def slogistic(nSources,nSamples):
 def sexparcsinh(nSources,nSamples):
     '''
     Generates and nSources by nSamples array of sources distributed according to:
-    
-        p(x) = sqrt((1 + sinh(x)^2)/2*pi)*exp(-sinh(x)^2/2)
+
+        p(x) = (1/sqrt(2*pi*a^2*(1+x/a)^2))*exp(-(arcsinh(y/a)^2)/2)
 
     This yields a set of superGaussian sources; each source is standardized to
-    have unit variance (p(x) above does not). 
+    have unit variance (p(x) above does not).
     '''
     s = sinh(randn(nSources,nSamples))
     return s/s.std(axis=1)[:,newaxis]
@@ -160,9 +162,9 @@ def sexparcsinh(nSources,nSamples):
 def sdblcosh(nSources,nSamples):
     '''
     Generates an nSources x nSamples array of sources distributed according to:
-    
-        p(x) = exp(-x^2)*cosh(x*sqrt(2))
-    
+
+        p(x) = exp(-x^2)*cosh(x*sqrt(2))/sqrt(pi*e)
+
     This yields a set of subGaussian sources (flatter top that Gaussian), and
     each source will have zero mean and unit variance.
     '''
