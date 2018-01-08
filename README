@@ -2,7 +2,8 @@ Author : Kevin S. Brown (kevin.s.brown@uconn.edu, github.com/thelahunginjeet)
 
 A pure python package for Independent Component Analysis (ICA).  Currently, only fixed-point FastICA is supported.
 
-See the documentation in the modules for detailed usage and function arguments.  Assuming you've cloned into a location python knows about and you want to extract n <= N sources from a data matrix X of size N x T, you can do
+See the documentation in the modules for detailed usage and function arguments.  Assuming you've cloned into a location python knows about and you want to extract
+n <= N sources from a data matrix X of size N x T, you can do
 
 	import pyica.fastica as ica
 	A,W,S = ica.fastica(X,n)
@@ -11,9 +12,8 @@ All source code is made available under the BSD-3 license.
 
 There is currently minimal testing code in the tests/ directory.  There are two ways to run the tests.  If you have pytest, run:
 
-	>py.test -v test_ica_pytest.py
+	>py.test -v testing_pytest.py
 
 If you don't have pytest, you can run the test via distutils:
-	
-	>python setup.py test
 
+	>python setup.py test
