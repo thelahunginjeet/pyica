@@ -14,7 +14,7 @@ class PyTest(Command):
         raise SystemExit(errno)
 
 setup(name='pyica',
-      version='1.0.0',
+      version='1.1.0',
       description='Pure Python Package for FastICA',
       author='Kevin Brown',
       author_email='kevin.s.brown@uconn.edu',

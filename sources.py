@@ -95,7 +95,7 @@ def unitsources(nSources=(1,1,1),nSamples=1024,subType='dblcosh',supType='invcos
     # gaussians
     sourceList.append(sgauss(nSources[2],nSamples))
 
-    return vstack(filter(lambda x : shape(x) > 0, sourceList))
+    return vstack([x for x in sourceList if len(x) > 0])
 
 
 
